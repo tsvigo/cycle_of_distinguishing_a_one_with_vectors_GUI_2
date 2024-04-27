@@ -10,6 +10,7 @@
 
 #include <iostream>
 using namespace std;
+#include <QFileDialog>
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 QString    Nazvaniye_fayla_s_neyronami_i_signalom="";
 long long variable_error;
@@ -26,15 +27,24 @@ Dialog::Dialog(QWidget *parent)
            std::cout << "  cycle_of_distinguishing_a_one_with_vectors_GUI_2 " << std::endl;
         
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-QString firstLine;
-QFile file("/home/viktor/my_projects_qt_2/Funktsiya_Resheniya_2/название файла с нейронами и сигналами.txt");
-if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-    QTextStream in(&file);
-    firstLine = Nazvaniye_fayla_s_neyronami_i_signalom=in.readLine();
-    file.close();
-} else {
-    // Обработка ошибки открытия файла
-}    
+//QString firstLine;
+//QFile file("/home/viktor/my_projects_qt_2/Funktsiya_Resheniya_2/название файла с нейронами и сигналами.txt");
+//if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+//    QTextStream in(&file);
+//    firstLine = Nazvaniye_fayla_s_neyronami_i_signalom=in.readLine();
+//    file.close();
+//} else {
+//    // Обработка ошибки открытия файла
+//}    
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+QString filePath = QFileDialog::getOpenFileName(this, tr("Выберите файл txt"),
+ //QDir::homePath()
+ "/home/viktor/my_projects_qt_2/Sgenerirovannye_fayly/Edinitsy_iz_shriftov_posle_pereustanovki_Debiana/"
+ , tr("Все файлы txt (*.txt)"));
+if (!filePath.isEmpty()) {
+    // filePath содержит полный путь выбранного файла
+    Nazvaniye_fayla_s_neyronami_i_signalom=filePath;
+}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   /// Читает нейроны и сигнал из файла в вектор.
     std::ifstream is(
