@@ -37,16 +37,17 @@ Dialog::Dialog(QWidget *parent)
 //    // Обработка ошибки открытия файла
 //}    
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//QString filePath = QFileDialog::getOpenFileName(this, tr("Выберите файл txt"),
-// //QDir::homePath()
-// "/home/viktor/my_projects_qt_2/Sgenerirovannye_fayly/Edinitsy_iz_shriftov_posle_pereustanovki_Debiana/"
-// , tr("Все файлы txt (*.txt)"));
-//if (!filePath.isEmpty()) {
-//    // filePath содержит полный путь выбранного файла
-//    Nazvaniye_fayla_s_neyronami_i_signalom=filePath;
-//}
+QString filePath = QFileDialog::getOpenFileName(this, tr("Выберите файл txt"),
+ //QDir::homePath()
+ "/home/viktor/my_projects_qt_2/Sgenerirovannye_fayly/Edinitsy_iz_shriftov_posle_pereustanovki_Debiana/"
+ , tr("Все файлы txt (*.txt)"));
+if (!filePath.isEmpty()) {
+    // filePath содержит полный путь выбранного файла
+    Nazvaniye_fayla_s_neyronami_i_signalom=filePath;
+}
 
-Nazvaniye_fayla_s_neyronami_i_signalom="/home/viktor/my_scripts_4/kraynie_znacheniya/neyrony_0.txt";
+//Nazvaniye_fayla_s_neyronami_i_signalom=
+////"/home/viktor/my_scripts_4/kraynie_znacheniya/neyrony_0.txt";
 //"/home/viktor/my_scripts_4/kraynie_znacheniya/neyrony_2147483647.txt";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,15 +60,15 @@ Nazvaniye_fayla_s_neyronami_i_signalom="/home/viktor/my_scripts_4/kraynie_znache
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    /// читает синапсы из файла в вектор
     std::ifstream is2(
-   //   "/home/viktor/my_projects_qt_2/Funktsiya_Resheniya_2/synapses.txt"
-     "/home/viktor/my_scripts_4/kraynie_znacheniya/sinapsy_2147483647.txt"
-   // "/home/viktor/my_scripts_4/kraynie_znacheniya/sinapsy_1.txt"
+     "/home/viktor/my_projects_qt_2/Funktsiya_Resheniya_2/synapses.txt"
+ //   "/home/viktor/my_scripts_4/kraynie_znacheniya/sinapsy_2147483647.txt"
+//   "/home/viktor/my_scripts_4/kraynie_znacheniya/sinapsy_1.txt"
     );
     std::istream_iterator<unsigned long long> start2(is2), end2;
     std::vector<unsigned long long> list_of_synapses(start2, end2);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// считаем ошибку
-list_of_neurons[200]=list_of_neurons[200]-1073741923; // поправка
+ list_of_neurons[200]=list_of_neurons[200]+1073741923; // поправка
 variable_error     =   1073741824-list_of_neurons[200] ;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
     if 
@@ -97,7 +98,10 @@ variable_error     =   1073741824-list_of_neurons[200] ;
         list_of_neurons[200] = list_of_neurons[200] + (list_of_neurons[neuron_index] / list_of_synapses[synapse_index]);
     }
 // считаем ошибку:
+ list_of_neurons[200]=list_of_neurons[200]+1073741923; // поправка
      variable_error     =   1073741824-list_of_neurons[200] ;    
+     std::cout << "variable_error = " << variable_error<< std::endl;
+          std::cout << "list_of_neurons[200] = " << list_of_neurons[200]<< std::endl;
 //
     if (variable_error<=0) // to the exit
         goto c;
@@ -126,7 +130,9 @@ variable_error     =   1073741824-list_of_neurons[200] ;
         variable_synapse_index_counter=0;
         
          goto b;
-         
+//########################################################################################################
+// c 0 синапса к последнему вычитаем по 1
+//########################################################################################################         
                   
                
  c:
